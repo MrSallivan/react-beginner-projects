@@ -1,4 +1,6 @@
 import './index.scss';
+import React from "react"
+import { useState } from "react"
 
 const questions = [
   {
@@ -36,7 +38,7 @@ function Game() {
   return (
     <>
       <div className="progress">
-        <div style={{ width: '50%' }} className="progress__inner"></div>
+        <div style={{ width: "10%" }} className="progress__inner"></div>
       </div>
       <h1>Что такое useState?</h1>
       <ul>
@@ -45,10 +47,11 @@ function Game() {
         <li>Это когда на ты никому не нужен</li>
       </ul>
     </>
-  );
+  )
 }
 
 function App() {
+	const [step, setStep] = useState(0)
   return (
     <div className="App">
       <Game />
