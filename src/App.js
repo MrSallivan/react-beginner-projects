@@ -4,8 +4,8 @@ import "./index.scss"
 
 function App() {
   const [rates, setRates] = useState({})
-  const [fromCurrency, setFromCurrency] = useState("RUB")
-  const [toCurrency, setToCurrency] = useState("USD")
+  const [fromCurrency, setFromCurrency] = useState("USD")
+  const [toCurrency, setToCurrency] = useState("RUB")
   const [fromPrice, setFromPrice] = useState(0)
   const [toPrice, setToPrice] = useState(0)
 
@@ -21,8 +21,18 @@ function App() {
         alert("Не удалось получить информацию")
       })
   }, [])
+
   const onChangeFromPrice = (value) => {
+    const price = value / rates[fromCurrency] ? rates[fromCurrency]['Value'] : 1
+    const result = price * rates[toCurrency]["Value"]
+
+    setToPrice(result)
     setFromPrice(value)
+  }
+  const onChangeToPrice = (value) => {
+    const price = value * (rates[toCurrency] ? rates[toCurrency]["Value"] : 1)
+    setToPrice(value)
+    setFromPrice(price)
   }
 
   return (
@@ -33,7 +43,12 @@ function App() {
         onChangeCurrency={setFromCurrency}
         onChangeValue={onChangeFromPrice}
       />
-      <Block value={toPrice} currency={toCurrency} onChangeCurrency={setToCurrency} />
+      <Block
+        value={toPrice}
+        currency={toCurrency}
+        onChangeCurrency={setToCurrency}
+        onChangeValue={onChangeToPrice}
+      />
     </div>
   )
 }
