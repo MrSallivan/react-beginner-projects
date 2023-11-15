@@ -10,29 +10,35 @@ function App() {
   const [toPrice, setToPrice] = useState(0)
 
   useEffect(() => {
-    fetch("https://www.cbr-xml-daily.ru/daily_json.js")
-      .then((res) => res.json())
-      .then((json) => {
-        setRates(json.Valute)
-        console.log(json.Valute)
-      })
-      .catch((err) => {
-        console.warn(err)
-        alert("Не удалось получить информацию")
-      })
+    var myHeaders = new Headers()
+    myHeaders.append("apikey", "S2vIv5tp5Ce2wHRiS5DNpuBLFvAUy65A")
+
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: myHeaders
+    }
+    fetch(
+      "https://api.apilayer.com/currency_data/live?source=USD&currencies=EUR%2CGBP%2CRUB",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setRates(result["quotes"]))
+      .catch((error) => console.log("error", error))
   }, [])
 
   const onChangeFromPrice = (value) => {
-    const price = value / rates[fromCurrency] ? rates[fromCurrency]['Value'] : 1
-    const result = price * rates[toCurrency]["Value"]
+			const cur = Object.keys(rates).find((itemCur)=>itemCur.includes(fromCurrency)) 
+			console.log(cur)
+      const price = value / rates[cur]
+      const result = price * rates[`USD${toCurrency}`]
 
-    setToPrice(result)
-    setFromPrice(value)
+      setToPrice(result)
+      setFromPrice(value)
+   
   }
   const onChangeToPrice = (value) => {
-    const price = value * (rates[toCurrency] ? rates[toCurrency]["Value"] : 1)
-    setToPrice(value)
-    setFromPrice(price)
+  
   }
 
   return (
