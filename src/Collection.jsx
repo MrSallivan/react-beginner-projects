@@ -13,7 +13,9 @@ const Collection = ({ name, images }) => {
     </div>
   )
 }
- 
+
 export default Collection;
+
+
 
 

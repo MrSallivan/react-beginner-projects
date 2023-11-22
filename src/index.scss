@@ -32,15 +32,16 @@ h1 {
     padding: 12px 18px;
     background-color: #fff;
     border-radius: 10px;
-    margin-right: 10px;
+    margin: 10px;
     cursor: pointer;
     font-weight: 500;
     font-size: 18px;
     border: 1px solid transparent;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
       border-color: #000;
+			transform: translateY(-5px);
     }
 
     &.active {
@@ -147,6 +148,7 @@ h1 {
     background-color: white;
     font-size: 18px;
     border-radius: 10px;
+		margin: 5px;
     margin-right: 15px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
