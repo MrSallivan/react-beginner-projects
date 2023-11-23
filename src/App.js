@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { Route, Router, Redirect } from "react-router-dom"
-import Collection from "./Collection"
+import { Routes, Route } from "react-router-dom"
+import { Link } from "react-router-dom"
+import CollectionPage from "./layout/collectionPage"
+import Collection from "./components/Collection"
 import "./index.scss"
 
 function App() {
   const [collections, setCollections] = useState([])
-	const [typeinput, setTypeinput] = useState("")
+  const [typeinput, setTypeinput] = useState("")
   const [categoryId, setCategoryId] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
@@ -63,11 +65,13 @@ function App() {
               item.name.toLowerCase().includes(typeinput.toLowerCase())
             )
             .map((collect, index) => (
-              <Collection
-                key={index}
-                name={collect.name}
-                images={collect.photos}
-              />
+              <Link className="collect-link " aria-current="page" to="/collect">
+                <Collection
+                  key={index}
+                  name={collect.name}
+                  images={collect.photos}
+                />
+              </Link>
             ))
         )}
       </div>
@@ -81,6 +85,9 @@ function App() {
           </li>
         ))}
       </ul>
+      <Routes>
+        <Route path="/collect" element={<CollectionPage />} />
+      </Routes>
     </div>
   )
 }
