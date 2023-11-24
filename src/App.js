@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Routes, Route } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 import CollectionPage from "./layout/collectionPage"
 import Collection from "./components/Collection"
 import "./index.scss"
@@ -56,6 +55,9 @@ function App() {
           placeholder="Поиск по названию"
         />
       </div>
+      <Routes>
+        <Route path="/collect" element={<CollectionPage />} />
+      </Routes>
       <div className="content">
         {isLoading ? (
           <h2>Загрузка ...</h2>
@@ -85,9 +87,6 @@ function App() {
           </li>
         ))}
       </ul>
-      <Routes>
-        <Route path="/collect" element={<CollectionPage />} />
-      </Routes>
     </div>
   )
 }
