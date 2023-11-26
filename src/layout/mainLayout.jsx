@@ -3,20 +3,13 @@ import { Link } from "react-router-dom"
 import Collection from "../components/Collection"
 
 const MainLayout = () => {
-  const [collections, setCollections] = useState([])
+	const [collections, setCollections] = useState([])
   const [typeinput, setTypeinput] = useState("")
   const [categoryId, setCategoryId] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
 
-  const cats = [
-    { name: "Все" },
-    { name: "Море" },
-    { name: "Горы" },
-    { name: "Архитектура" },
-    { name: "Города" }
-  ]
-  useEffect(() => {
+	useEffect(() => {
     setIsLoading(true)
     const category = categoryId ? `category=${categoryId}` : ""
     fetch(
@@ -30,6 +23,15 @@ const MainLayout = () => {
       })
       .finally(() => setIsLoading(false))
   }, [categoryId, page])
+
+  const cats = [
+    { name: "Все" },
+    { name: "Море" },
+    { name: "Горы" },
+    { name: "Архитектура" },
+    { name: "Города" }
+  ]
+
 
   return (
     <main>
@@ -51,6 +53,7 @@ const MainLayout = () => {
           onChange={(e) => setTypeinput(e.target.value)}
           className="search-input"
           placeholder="Поиск по названию"
+          name="search"
         />
       </div>
       <div className="content">
@@ -62,7 +65,7 @@ const MainLayout = () => {
               item.name.toLowerCase().includes(typeinput.toLowerCase())
             )
             .map((collect, index) => (
-              <Link to={`/collection/${collect.id}`}>
+              <Link to={`/collection/${collect.id}`} key={index} collections={collections}>
                 <Collection
                   key={index}
                   name={collect.name}
@@ -75,6 +78,7 @@ const MainLayout = () => {
       <ul className="pagination">
         {[...Array(4)].map((_, i) => (
           <li
+            key={i}
             onClick={() => setPage(i + 1)}
             className={page === i + 1 ? "active" : ""}
           >
