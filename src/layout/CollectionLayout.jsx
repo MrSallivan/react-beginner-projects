@@ -1,6 +1,6 @@
 import React from "react"
 import { useParams } from "react-router-dom"
-import MainLayout from "./mainLayout"
+import NotFound from "../components/page/NotFound"
 import CollectionPage from "../components/page/CollectionPage"
 
 const CollectionLayout = ({ collectionAll }) => {
@@ -9,13 +9,13 @@ const CollectionLayout = ({ collectionAll }) => {
 
   return (
     <>
-      {idCollection ? (
+      {idCollection <= collectionAll.length ? (
         <CollectionPage
           idCollection={idCollection}
           collectionAll={collectionAll}
         />
       ) : (
-        <MainLayout />
+        <NotFound />
       )}
     </>
   )

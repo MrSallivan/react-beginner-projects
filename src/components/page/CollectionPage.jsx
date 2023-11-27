@@ -1,8 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { Fancybox } from "@fancyapps/ui"
+import "@fancyapps/ui/dist/fancybox/fancybox.css"
 
 const CollectionPage = ({ idCollection, collectionAll }) => {
-
+  Fancybox.bind("[data-fancybox]", {})
   return (
     <div className="gallery">
       <Link className="gallery__back" to={"/"}>
@@ -16,14 +18,14 @@ const CollectionPage = ({ idCollection, collectionAll }) => {
           {collectionAll
             .filter((item) => item.id == idCollection)[0]
             ["photos"].map((image, i) => (
-              <div key={i} className="gallery__item">
+              <a key={i} href={image} className="gallery__item" data-fancybox>
                 <img
                   key={i}
                   className="gallery__img"
                   src={image}
                   alt="pictires"
                 />
-              </div>
+              </a>
             ))}
         </div>
       </div>

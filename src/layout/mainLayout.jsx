@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Collection from "../components/Collection"
 
-const MainLayout = () => {
-	const [collections, setCollections] = useState([])
+const MainLayout = ({ countsCollection, limit }) => {
+  const [collections, setCollections] = useState([])
   const [typeinput, setTypeinput] = useState("")
   const [categoryId, setCategoryId] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
 
-	useEffect(() => {
+  useEffect(() => {
     setIsLoading(true)
     const category = categoryId ? `category=${categoryId}` : ""
     fetch(
-      `https://655b5afcab37729791a8f7f5.mockapi.io/photos?page=${page}&limit=7&${category}`
+      `https://655b5afcab37729791a8f7f5.mockapi.io/photos?page=${page}&limit=${limit}&${category}`
     )
       .then((res) => res.json())
       .then((data) => setCollections(data))
@@ -31,8 +31,7 @@ const MainLayout = () => {
     { name: "Архитектура" },
     { name: "Города" }
   ]
-
-
+  const paginationLength = Math.ceil(countsCollection / limit)
   return (
     <main>
       <h1>Моя коллекция фотографий</h1>
@@ -65,7 +64,11 @@ const MainLayout = () => {
               item.name.toLowerCase().includes(typeinput.toLowerCase())
             )
             .map((collect, index) => (
-              <Link to={`/collection/${collect.id}`} key={index} collections={collections}>
+              <Link
+                to={`/collection/${collect.id}`}
+                key={index}
+                collections={collections}
+              >
                 <Collection
                   key={index}
                   name={collect.name}
@@ -76,7 +79,7 @@ const MainLayout = () => {
         )}
       </div>
       <ul className="pagination">
-        {[...Array(4)].map((_, i) => (
+        {[...Array(paginationLength)].map((_, i) => (
           <li
             key={i}
             onClick={() => setPage(i + 1)}

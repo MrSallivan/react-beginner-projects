@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
 import MainLayout from "./layout/mainLayout"
 import CollectionLayout from "./layout/CollectionLayout"
+import NotFound from "./components/page/NotFound"
 import "./index.scss"
 
 function App() {
@@ -16,15 +17,22 @@ function App() {
         alert("Ошибка при получении данных")
       })
   }, [])
-
+  const countsCollection = collectionsAll.length
+  const limit = 5
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<MainLayout />} />
+        <Route
+          path="/"
+          element={
+            <MainLayout countsCollection={countsCollection} limit={limit} />
+          }
+        />
         <Route
           path="/collection/:idCollection"
           element={<CollectionLayout collectionAll={collectionsAll} />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )
