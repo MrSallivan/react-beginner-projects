@@ -7,7 +7,7 @@ const CollectionPage = ({ idCollection, collectionAll }) => {
   Fancybox.bind("[data-fancybox]", {})
   return (
     <div className="gallery">
-      <Link className="gallery__back" to={"/"}>
+      <Link className="gallery__back" to={"/projects/photos"}>
         Назад
       </Link>
       <p className="gallery__title">

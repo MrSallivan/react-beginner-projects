@@ -65,7 +65,7 @@ const MainLayout = ({ countsCollection, limit }) => {
             )
             .map((collect, index) => (
               <Link
-                to={`/collection/${collect.id}`}
+                to={`/projects/photos/collection/${collect.id}`}
                 key={index}
                 collections={collections}
               >

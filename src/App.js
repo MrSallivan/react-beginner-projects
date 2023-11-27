@@ -23,13 +23,13 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/"
+          path="/projects/photos/"
           element={
             <MainLayout countsCollection={countsCollection} limit={limit} />
           }
         />
         <Route
-          path="/collection/:idCollection"
+          path="/projects/photos/collection/:idCollection"
           element={<CollectionLayout collectionAll={collectionsAll} />}
         />
         <Route path="*" element={<NotFound />} />

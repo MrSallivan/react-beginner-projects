@@ -169,16 +169,21 @@ h1 {
   gap: 15px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   .gallery__item {
-		padding-top: 75%;
-		position: relative;
-		border-radius: 5px;
-		overflow: hidden;
+    padding-top: 75%;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
   }
   .gallery__img {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
+}
+.gallery__back {
+  text-decoration: none;
+	font-weight: 900;
+  color: inherit;
 }
